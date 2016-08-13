@@ -67,7 +67,7 @@ def flatten_list(names, max_num):
     text = names[0]
     # add next authors
     for i in range(1, min(max_num, len(names))):
-            text += ' and ' + names[i]
+        text += ' and ' + names[i]
     # add truncated authors
     if len(names) > max_num:
         text += ' et al.'
@@ -89,4 +89,3 @@ def remove_latex_crap(incoming):
     for s in subs:
         text = text.replace(s[0], s[1])
     return text
-

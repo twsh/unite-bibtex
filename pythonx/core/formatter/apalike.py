@@ -1,11 +1,11 @@
-import util
+from . import util
 
 def default(e):
     # get the data
     author = util.author_or_editor(e, 5)
     year = util.get(e, 'year', 'no year')
     title = util.get(e, 'title', '=no title=')
-    bibtex_key = unicode(e['ID'])
+    bibtex_key = str(e['ID'])
     bibtex_type = e['ENTRYTYPE']
     # build the string
     text = str()
@@ -30,7 +30,7 @@ def article(e):
     journal = util.get(e, 'journal', '=no journal=')
     volume = util.get(e, 'volume', None)
     pages = util.get(e, 'pages', None)
-    bibtex_key = unicode(e['ID'])
+    bibtex_key = str(e['ID'])
     bibtex_type = e['ENTRYTYPE']
     # build the string
     text = str()
@@ -60,7 +60,7 @@ def unpublished(e):
     author = util.author_or_editor(e, 5)
     year = util.get(e, 'year', 'no year')
     title = util.get(e, 'title', '=no title=')
-    bibtex_key = unicode(e['ID'])
+    bibtex_key = str(e['ID'])
     bibtex_type = e['ENTRYTYPE']
     # build the string
     text = str()
@@ -85,7 +85,7 @@ def phdthesis(e):
     year = util.get(e, 'year', 'no year')
     title = util.get(e, 'title', '=no title=')
     school = util.get(e, 'school', '=no school=')
-    bibtex_key = unicode(e['ID'])
+    bibtex_key = str(e['ID'])
     bibtex_type = e['ENTRYTYPE']
     # build the string
     text = str()
@@ -114,7 +114,7 @@ def book(e):
     title = util.get(e, 'title', '=no title=')
     publisher = util.get(e, 'publisher', None)
     address = util.get(e, 'address', None)
-    bibtex_key = unicode(e['ID'])
+    bibtex_key = str(e['ID'])
     bibtex_type = e['ENTRYTYPE']
     # build the string
     text = str()
@@ -148,7 +148,7 @@ def incollection(e):
     editor = util.editor(e, 3)
     pages = util.get(e, 'pages', None)
     booktitle = util.get(e, 'booktitle', '=no booktitle=')
-    bibtex_key = unicode(e['ID'])
+    bibtex_key = str(e['ID'])
     bibtex_type = e['ENTRYTYPE']
     # build the string
     text = str()
@@ -192,5 +192,3 @@ def inproceedings(e):
     
 def inbook(e):
     return incollection(e)
-
-

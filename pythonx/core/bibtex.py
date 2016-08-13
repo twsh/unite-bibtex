@@ -1,5 +1,5 @@
 import bibtexparser
-import formatter.apalike
+from .formatter import apalike
 from bibtexparser.bparser import BibTexParser
 from bibtexparser.customization import *
 
@@ -56,8 +56,8 @@ def parse(filename):
     # 2. build the Unite text for each entry
     unite_keyvals = dict()
     for e in entries:
-        f = getattr(formatter.apalike, e['ENTRYTYPE'], formatter.apalike.default)
-        unite_keyvals[unicode(e['ID'])] = f(e)
+        f = getattr(apalike, e['ENTRYTYPE'], apalike.default)
+        unite_keyvals[str(e['ID'])] = f(e)
     return unite_keyvals
 
 def customizations(record):
@@ -84,5 +84,3 @@ def editor_split(record):
         else:
             del record["editor"]
     return record
-
-

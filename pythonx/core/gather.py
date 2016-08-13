@@ -1,7 +1,5 @@
-import bibtex
-import cache
-
-ENCODING = 'utf-8'
+from . import bibtex
+from . import cache
 
 def candidates(bib_files, cache_dir):
     """
@@ -12,7 +10,7 @@ def candidates(bib_files, cache_dir):
     """
     # 1. Sanity check:
     # if bib_files incorrectly set to string, add single bib file to list
-    if type(bib_files) is str:
+    if isinstance(bib_files, str):
         bib_files = [bib_files]
     # 2. Gather the candidates into unite_keyvals and use cache
     # format of unite_keyvals:
@@ -28,7 +26,7 @@ def candidates(bib_files, cache_dir):
         unite_keyvals.update(c.data)
     # 3. Create list based on bibtex key, case-insensitive
     gathered = [(bibtex_key, text) for bibtex_key, text in
-                sorted(unite_keyvals.viewitems(), key=lambda x: x[0].lower())]
+                sorted(list(unite_keyvals.items()), key=lambda x: x[0].lower())]
     return gathered
 
 def make_vim_commands(gathered, target, prefix, postfix):
@@ -42,8 +40,8 @@ def make_vim_commands(gathered, target, prefix, postfix):
     """
     cmd_list = list()
     for item in gathered:
-        action_text = prefix + item[0].encode(ENCODING) + postfix
-        word = item[1].replace("'", "''").encode(ENCODING)
+        action_text = prefix + item[0] + postfix
+        word = item[1].replace("'", "''")
         cmd = "call add(%s, {'action__text': '%s', 'word': '%s'})" % (
             target, action_text, word)
         cmd_list.append(cmd)

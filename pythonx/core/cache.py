@@ -29,8 +29,8 @@ class Cache(object):
         self.data = dict()
         # set up names of cache and lock file
         self.source_path = os.path.abspath(source)
-        cache_name = base64.urlsafe_b64encode(self.source_path) + '.cache'
-        lock_name = base64.urlsafe_b64encode(self.source_path) + '.lock'
+        cache_name = base64.urlsafe_b64encode(self.source_path.encode()).decode() + '.cache'
+        lock_name = base64.urlsafe_b64encode(self.source_path.encode()).decode() + '.lock'
         cache_path = os.path.abspath(cache_dir)
         self.cache_path = os.path.join(cache_path, cache_name)
         self.lock_path = os.path.join(cache_path, lock_name)
@@ -144,6 +144,3 @@ class AttemptedUnlockingUnlocked(Exception):
 class WriteUnfilledCache(Exception):
     """ attempt to write an unfilled cache """
     pass
-
-
-

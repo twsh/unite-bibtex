@@ -6,11 +6,10 @@ Copyright : Copyright 2015, Mark Sprevak
 License   : BSD3
 """
 import argparse
-import bibtex
-import cache
+from . import bibtex
+from . import cache
 import datetime
 import os
-import sys
 import time
 
 VERSION = "0.1"
@@ -41,7 +40,7 @@ def main():
     try:
         # check if cache is up to date
         for b in bib_files:
-            print('watching: "%s"' % b)
+            print(('watching: "%s"' % b))
             c[b] = cache.Cache(b, cache_dir)
             mtime_last[b] = 0
             try:
@@ -49,7 +48,7 @@ def main():
                 mtime_last[b] = c[b].timestamp
             except (cache.NoCache, cache.OutdatedCache):
                 mtime_last[b] = 0
-        print('cache directory: "%s"' % cache_dir)
+        print(('cache directory: "%s"' % cache_dir))
         print('(press Control+C to stop watching)')
         # monitor for changes
         while True:
@@ -74,16 +73,16 @@ def main():
 def update(c):
     today = datetime.date.today().isoformat()
     now = datetime.datetime.now().time().isoformat()
-    print(today + ' ' + now)
-    print('    updated "%s"' % c.cache_path)
-    print('    cache for "%s"' % c.source_path)
+    print((today + ' ' + now))
+    print(('    updated "%s"' % c.cache_path))
+    print(('    cache for "%s"' % c.source_path))
     start_time = time.time()
     c.update(bibtex.parse)
     c.write()
     elapsed_time = time.time() - start_time
     time_report = 'time taken: %f seconds' % elapsed_time
-    print('    %d entries' % len(c.data))
-    print('    done (%s)' % time_report)
+    print(('    %d entries' % len(c.data)))
+    print(('    done (%s)' % time_report))
 
 def parse_cli():
     p = argparse.ArgumentParser(
@@ -111,4 +110,3 @@ def parse_cli():
 
 if __name__ == '__main__':
     main()
-

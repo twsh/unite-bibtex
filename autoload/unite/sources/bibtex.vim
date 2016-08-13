@@ -64,7 +64,7 @@ function! s:source.gather_candidates(args, context)
     endif
     " gather the candidates
     let l:gathered = []
-    python import unitebibtex; unitebibtex.vim_bridge_gather_candidates()
+    python3 import unitebibtex; unitebibtex.vim_bridge_gather_candidates()
     return l:gathered
 endfunction
 
