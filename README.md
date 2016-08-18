@@ -7,7 +7,6 @@ If you have a version of Vim built with Python 3 use this plugin.
 If you have one built with Python 2 use the original: [github.com/msprev/unite-bibtex](https://github.com/msprev/unite-bibtex).
 The python-vim documentation might be useful: [vimdoc.sourceforge.net/htmldoc/if_pyth.html](http://vimdoc.sourceforge.net/htmldoc/if_pyth.html).
 
-- Tesco
 # unite-bibtex
 
 A BibTeX source for unite.vim
